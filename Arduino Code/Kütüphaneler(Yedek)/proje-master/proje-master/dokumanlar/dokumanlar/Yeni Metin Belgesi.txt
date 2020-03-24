@@ -1,0 +1,2 @@
+http://www.cazda.com/lcd-panel-i2c-arabirimi-adresi-nasil-tespit-edilir/
+http://www.cazda.com/arduino-16x2-20x4-lcd-panellerde-sadece-ilk-karakter-gosterme-sorunu/

@@ -2,12 +2,11 @@
 #include <MFRC522.h>
 #include <SPI.h>
 #include <SD.h>
-//#include <RFID.h>
+
 int ResetPin = 8;
 int SDAPin = 9;
 byte id[4] = {0, 0, 0, 0};
 MFRC522 kart(SDAPin, ResetPin);
-//RFID rfid(SDAPin, ResetPin);
 File file;
 LCD5110 myGLCD(48, 47, 46, 45, 44);
 extern uint8_t SmallFont[];
@@ -16,13 +15,11 @@ extern uint8_t BigNumbers[];
 
 void setup() {
   Serial.begin(9600);
-  /*pinMode(ResetPin,OUTPUT);
-    pinMode(SDAPin,OUTPUT);
-    pinMode(53,OUTPUT);*/
+  
   SPI.begin();
   kart.PCD_Init();
   Serial.println("Okuma Başladı..");
-  //rfid.init();
+  
   myGLCD.InitLCD();
   myGLCD.setFont(SmallFont);
   //pinMode(3,OUTPUT);
@@ -38,26 +35,7 @@ void setup() {
 }
 
 void loop() {
-  //CardRead();
-  //LedYak(1000);
-
-  //delay(100);
-  /*digitalWrite(53,HIGH);//Sd Kart Kesildi
-    digitalWrite(9,LOW);//*/
-
-  /*if(rfid.isCard()){
-    myGLCD.clrScr();
-    myGLCD.print("Kart Okunuyor..",CENTER,16);
-    }
-    delay(1000);*/
-
-  /*if(kart.PICC_IsNewCardPresent()){
-    //myGLCD.clrScr();
-    //myGLCD.print("Kart Okunuyor..",CENTER,16);
-    delay(100);
-    CardRead();//yeni kart gelene kadar okuma yapan metot
-    //return;
-    }*/
+  
 
   if (!kart.PICC_IsNewCardPresent())
     return;
@@ -71,7 +49,7 @@ void loop() {
 }
 void CardRead() {
   String numara;
-  //kart.PICC_ReadCardSerial();
+  
   Serial.print("Id Numarasi: ");
 
   for (int i = 0; i < 4; i++) {
