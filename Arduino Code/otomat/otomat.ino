@@ -3,11 +3,11 @@
 #include <SPI.h>
 #include <SD.h>
 //#include <RFID.h>
-int ResetPin = 8;
-int SDAPin = 9;
+int ResetPin = 9;
+int SsPin = 10;
+int CsPin = 8;
 byte id[4] = {0, 0, 0, 0};
-MFRC522 kart(SDAPin, ResetPin);
-//RFID rfid(SDAPin, ResetPin);
+MFRC522 kart(SsPin, ResetPin);
 File file;
 LCD5110 myGLCD(48, 47, 46, 45, 44);
 extern uint8_t SmallFont[];
@@ -16,25 +16,20 @@ extern uint8_t BigNumbers[];
 
 void setup() {
   Serial.begin(9600);
-  /*pinMode(ResetPin,OUTPUT);
-    pinMode(SDAPin,OUTPUT);
-    pinMode(53,OUTPUT);*/
   SPI.begin();
-  kart.PCD_Init();
-  Serial.println("Okuma Başladı..");
-  //rfid.init();
-  myGLCD.InitLCD();
-  myGLCD.setFont(SmallFont);
+  SD.begin(CsPin);
+  kart.PICC_HaltA();
+  kart.PCD_SoftPowerDown();
+  //myGLCD.InitLCD();
+  //myGLCD.setFont(SmallFont);
   //pinMode(3,OUTPUT);
-
-  delay(1000);
-  if (!SD.begin(53)) {
+  if (!SD.begin(CsPin)) {
     Serial.println("SD Kart Takılı Değil!");
-    myGLCD.print("SD Kart Hata", CENTER, 16);
     return;
   }
   Serial.println("Cihaz Hazir");
   myGLCD.print("Cihaz Hazir.", CENTER, 16);
+  kart.PCD_Init();
 }
 
 void loop() {
