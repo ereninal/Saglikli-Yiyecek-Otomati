@@ -14,9 +14,11 @@ void setup() {
 }
 
 void loop() {
+  String get_data="";
   if(Serial.available()>0)
     {
-      Serial.print(Serial.read());
+      gelen = Serial.readString();
+      Serial.print(gelen);
       Serial.println(" ");
       
     }
