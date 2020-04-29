@@ -44,11 +44,8 @@ void loop() {
     Serial.println("AT+CIPSTART Error");
   }
   
-  String veri = "GET https://api.thingspeak.com/update?api_key=O3GTM3R2CZ5172OS";   //Thingspeak komutu. Key kısmına kendi api keyimizi yazıyoruz.                                   //Göndereceğimiz sıcaklık değişkeni
-  veri += "&field1=";
-  veri += String(5);
-  veri += "&field2=";
-  veri += String(10);                                        //Göndereceğimiz nem değişkeni
+  String veri = "GET https://localhost:5001";   //Thingspeak komutu. Key kısmına kendi api keyimizi yazıyoruz.                                   //Göndereceğimiz sıcaklık değişkeni
+  veri += "<p>deneme</p>";                                        //Göndereceğimiz nem değişkeni
   veri += "\r\n\r\n"; 
   esp.print("AT+CIPSEND=");                                   //ESP'ye göndereceğimiz veri uzunluğunu veriyoruz.
   esp.println(veri.length()+2);
