@@ -23,7 +23,9 @@ void loop() {
     while(data.available())
     {
      Serial.write(data.read());
-     //Serial.println(" ");
+     Serial.println(" ");
+     post_data = data.read();
+     Serial.println(post_data);
     }
     Serial.println(" ");
   }
